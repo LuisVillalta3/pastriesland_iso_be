@@ -12,6 +12,12 @@
 4. Antes de interactuar con la api, ejecutar `pnpm run migration:run`.
 5. Reiniciar el servidor.
 
+## How to code
+Read [How to code](https://github.com/LuisVillalta3/pastriesland_iso_be/blob/main/documentation/how-to-code.md)
+
+## Nest Readme
+Read [Nest Readme](https://github.com/LuisVillalta3/pastriesland_iso_be/blob/main/documentation/nest-README.md)
+
 ## Conociendo la documentación
 
 Una vez iniciada la api en el ambiente de desarrollo se podra visualizar la documentación y el ambiente de pruebas de la api. Para ello ingresa a [Api Documentation](http://localhost:3000/api).
