@@ -21,6 +21,7 @@ async function bootstrap() {
     .setTitle('Pastriesland API')
     .setDescription('API documentation for Pastriesland')
     .setVersion('1.0')
+    .addBearerAuth() // Add Bearer token authentication
     .build();
 
   const documentFactory = SwaggerModule.createDocument(app, config);
