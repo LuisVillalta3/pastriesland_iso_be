@@ -20,7 +20,7 @@ import { AddressEntity } from '@modules/users/entities/address.entity';
     ]),
     ErrorLogModule,
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, AdminsService],
   providers: [AdminsService, UsersService],
   controllers: [AdminsController, UsersController],
 })

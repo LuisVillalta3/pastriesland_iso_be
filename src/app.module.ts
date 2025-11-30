@@ -11,6 +11,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { MocksModule } from './mocks/mocks.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { OrdersModule } from './modules/orders/orders.module';
     }),
     ContactsModule,
     OrdersModule,
+    MocksModule,
   ],
   controllers: [],
   providers: [],

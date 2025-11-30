@@ -8,4 +8,7 @@ export interface EnvConfig {
   DB_SYNC: boolean;
   JWT_SECRET_KEY: string;
   SALT_OR_ROUNDS: number;
+  ADMIN_NAME: string;
+  ADMIN_LASTNAME: string;
+  ADMIN_EMAIL: string;
 }
