@@ -6,7 +6,6 @@ import {
   IsNumber,
   IsPositive,
   IsString,
-  IsUUID,
 } from 'class-validator';
 import { ProductVariantType } from '@modules/products/entities/product-variant.entity';
 

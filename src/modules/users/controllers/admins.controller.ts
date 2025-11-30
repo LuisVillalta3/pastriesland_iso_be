@@ -10,7 +10,6 @@ import {
 import { UserDto } from '@modules/users/dto/user.dto';
 import { HttpResponse } from '@common/http-responses/http.response';
 import { CreateAdminSchema } from '@/components/schemas/create-user.schema';
-//import { AdminAuthGuard } from '@modules/auth/guards/admin.guard';
 import { ErrorHandler } from '@common/decorators/error-handler.decorator';
 
 @Controller('admin/admins')
@@ -48,6 +47,7 @@ export class AdminsController {
 
   @Get()
   @ApiBearerAuth()
+  //@UseGuards(AdminAuthGuard)
   async getAllAdmins() {
     return await this.adminService.getAllAdmins();
   }
