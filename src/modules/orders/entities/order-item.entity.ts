@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { BaseEntity } from '@common/entities/base.entity';
 import { OrderEntity } from '@modules/orders/entities/order.entity';
+import { ImageEntity } from '@/modules/images/entities/image.entity';
 
 @Entity('order_items')
 export class OrderItemEntity extends BaseEntity {
@@ -24,4 +25,6 @@ export class OrderItemEntity extends BaseEntity {
 
   @ManyToOne(() => OrderEntity, (order) => order.items, { onDelete: 'CASCADE' })
   order: OrderEntity;
+
+  images: ImageEntity[] = [];
 }

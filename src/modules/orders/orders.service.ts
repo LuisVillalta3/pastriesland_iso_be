@@ -5,6 +5,7 @@ import { DataSource, Repository } from 'typeorm';
 import { CreateOrderDto } from '@modules/orders/dto/create-order.dto';
 import { ClientEntity } from '@modules/users/entities/client.entity';
 import { OrderItemEntity } from '@modules/orders/entities/order-item.entity';
+import { ImageEntity } from '@modules/images/entities/image.entity';
 
 @Injectable()
 export class OrdersService {
@@ -13,6 +14,8 @@ export class OrdersService {
     private orderRepo: Repository<OrderEntity>,
     @InjectRepository(ClientEntity)
     private clientRepo: Repository<ClientEntity>,
+    @InjectRepository(ImageEntity)
+    private readonly imageRepo: Repository<ImageEntity>,
     private readonly dataSource: DataSource,
   ) {}
 
@@ -31,6 +34,7 @@ export class OrdersService {
 
       const order = queryRunner.manager.create(OrderEntity, {
         ...orderDto,
+        total: orderDto.total.replace(/[^0-9.-]+/g, ''),
         user,
         status: 'pending',
         items: [],
@@ -40,12 +44,12 @@ export class OrdersService {
 
       for (const item of orderDto.items) {
         const p = queryRunner.manager.create(OrderItemEntity, {
-          productName: item.productName,
-          productId: item.productId,
+          productName: item.name,
+          productId: item.id,
           flavors: item.flavors || '',
           addons: item.addons || '',
           design: item.design || '',
-          productPrice: item.productPrice,
+          productPrice: item.basePrice,
           order: savedOrder,
         });
 
@@ -68,5 +72,37 @@ export class OrdersService {
       relations: ['items', 'user'],
       order: { createdAt: 'DESC' },
     });
+  }
+
+  async getOrderById(orderId: string) {
+    const order = await this.orderRepo.findOne({
+      where: { id: orderId },
+      relations: ['items', 'user'],
+    });
+
+    if (!order) throw new NotFoundException('Order not found');
+
+    order.items = await Promise.all(
+      order.items.map((item) => this.addProductImages(item)),
+    );
+
+    return order;
+  }
+
+  async addProductImages(product: OrderItemEntity) {
+    product.images = await this.imageRepo.find({
+      where: {
+        imageableId: product.id,
+        imageableType: 'products',
+      },
+    });
+
+    const finalProduct = {
+      ...product,
+      name: product.productName,
+      basePrice: product.productPrice,
+    };
+
+    return finalProduct;
   }
 }

@@ -41,4 +41,15 @@ export class OrdersController {
       message: 'Orders retrieved successfully',
     };
   }
+
+  @Get(':orderId')
+  async getOrderById(@Param('orderId') orderId: string) {
+    const order = await this.orderService.getOrderById(orderId);
+
+    return {
+      statusCode: HttpStatus.OK,
+      data: order,
+      message: 'Order retrieved successfully',
+    };
+  }
 }

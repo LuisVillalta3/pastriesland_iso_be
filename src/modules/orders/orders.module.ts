@@ -6,11 +6,17 @@ import { OrderItemEntity } from '@modules/orders/entities/order-item.entity';
 import { ErrorLogModule } from '@modules/error-log/error-log.module';
 import { OrdersController } from './controllers/orders.controller';
 import { ClientEntity } from '@modules/users/entities/client.entity';
+import { ImageEntity } from '../images/entities/image.entity';
 
 @Module({
   providers: [OrdersService],
   imports: [
-    TypeOrmModule.forFeature([OrderEntity, OrderItemEntity, ClientEntity]),
+    TypeOrmModule.forFeature([
+      OrderEntity,
+      OrderItemEntity,
+      ClientEntity,
+      ImageEntity,
+    ]),
     ErrorLogModule,
   ],
   controllers: [OrdersController],

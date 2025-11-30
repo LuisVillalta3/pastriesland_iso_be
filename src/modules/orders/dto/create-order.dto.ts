@@ -27,15 +27,15 @@ export class CreateOrderItemDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
-  productId: string;
+  id: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  productName: string;
+  name: string;
 
   @ApiProperty()
   @IsDecimal()
-  productPrice: string;
+  basePrice: string;
 
   @ApiProperty({ default: '', nullable: true })
   addons: string;
