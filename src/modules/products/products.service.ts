@@ -1,11 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {
-  DataSource,
-  FindOptionsWhere,
-  In,
-  QueryRunner,
-  Repository,
-} from 'typeorm';
+import { DataSource, In, QueryRunner, Repository } from 'typeorm';
 import { ProductEntity } from '@modules/products/entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
@@ -200,7 +194,7 @@ export class ProductsService {
   async getActiveProducts(getProductsDto: GetProductsDto) {
     const {
       onlyOutstandings = false,
-      categories = "",
+      categories = '',
       paginated = false,
       page = 1,
       limit = 10,

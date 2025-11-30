@@ -9,5 +9,4 @@ export const configValidationSchema = Joi.object({
   IS_PRODUCTION: Joi.boolean().default(false),
   DB_SYNC: Joi.boolean().default(false),
   SALT_OR_ROUNDS: Joi.number().default(10),
-  JWT_SECRET_KEY: Joi.string().required(),
 });
